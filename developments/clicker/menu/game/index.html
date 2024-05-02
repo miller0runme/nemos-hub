@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кликер</title>
+<style>
+    
+    
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        background-image: url('фон.jpeg');
+        max-height: 100vh;
+        max-width: 100vw;
+        overflow: hidden;
+    }
+
+    button {
+        padding: 20px 40px;
+        font-size: 24px;
+        background-color: #3498db;
+        color: #fff;
+        border-radius: 100px;
+        cursor: pointer;
+    }
+    
+    .button.clicker {
+        padding: 120px 120px;
+        font-size: 24px;
+        background-color: red;
+        color: #fff;
+        border-radius: 60px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent; /* Убрать подсветку при клике */
+        touch-action: manipulation; /* Сделать кнопку доступной для мультитача */
+
+    }
+    
+    #score {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    #leaderboard {
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    #leaderboard th, #leaderboard td {
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+    }
+</style>
+</head>
+<body>
+    
+<div style="background-color: white; border-radius: 10px;" id="score">Счёт: 0</div>
+<input style="display: none;" type="text" id="nickname" placeholder="Введите ваше имя">
+<button class="button clicker" id="clickButton" onclick="incrementScore()">Кликай!</button>
+<p></p>
+<div style="background-color: white; border-radius: 10px;"><table id="leaderboard"><div style="background-color: white;">
+    <tr>
+        <th>Лучший результат</th>
+        <th>Результат</th>
+    </tr>
+    <tr>
+        <td id="bestScore">0</td>
+        <td id="playerScore">0</td>
+    </tr>
+    
+    <p></p>
+    
+    <tr>
+        <td colspan="2"><b>Таблица лидеров:</b>в разработке</td>
+    </tr>
+</table></div>
+
+<script>
+
+
+
+
+
+
+let clicks = 0;
+let clicksPerSecond = 0;
+
+const button = document.getElementById('clickButton');
+
+button.addEventListener('click', () => {
+  clicks++;
+});
+
+setInterval(() => {
+  clicksPerSecond = clicks;
+  button.innerText = `Клики в секунду: ${clicksPerSecond}`;
+  clicks = 0;
+}, 1000);
+    
+
+let lastClickTime = new Date().getTime();
+let clickSpeed = 0;
+
+button.addEventListener('click', function() {
+    const currentClickTime = new Date().getTime();
+    const clickTimeDifference = currentClickTime - lastClickTime;
+
+    clickSpeed = 1000 / clickTimeDifference; // Рассчитываем скорость кликов в кликах в секунду
+    lastClickTime = currentClickTime;
+
+    // Изменение цвета кнопки
+    let hue = Math.min(clickSpeed * 2, 360); // Изменение оттенка цвета в диапазоне от 0 до 360
+    let color = `hsl(${hue}, 50%, 50%)`; // Создание CSS цвета в формате HSL
+    button.style.backgroundColor = color;
+});
+
+//доп
+
+
+let score = 0;
+let bestScore = localStorage.getItem('bestScore') || 0;
+let playerNickname = "";
+let leaderboard = [];
+
+document.getElementById('bestScore').innerText = bestScore;
+
+function incrementScore() {
+    score++;
+    document.getElementById('score').innerText = `Счёт: ${score}`;
+    document.getElementById('playerScore').innerText = score;
+    if(score > bestScore) {
+        bestScore = score;
+        localStorage.setItem('bestScore', bestScore);
+        leaderboard = [];
+    }
+    if(playerNickname) {
+        leaderboard.push({ "nickname": playerNickname, "score": score });
+        leaderboard.sort((a, b) => b.score - a.score);
+        updateLeaderboard();
+    }
+}
+
+function updateLeaderboard() {
+    let leaderboardTable = document.getElementById('leaderboard');
+    for(let i = 0; i < leaderboard.length && i < 5; i++) {
+        let row = leaderboardTable.insertRow(-1);
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        cell1.innerHTML = leaderboard[i].nickname;
+        cell2.innerHTML = leaderboard[i].score;
+    }
+}
+document.getElementById('nickname').addEventListener('input', function() {
+    playerNickname = document.getElementById('nickname').value;
+});
+</script>
+</body>
+</html>

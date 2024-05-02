@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading Page</title>
+<style>
+    body {
+        background-color: black;    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    img {
+        width: 200px; /* Размеры фото */
+        height: 200px;
+    }
+    .loader {
+        position: relative;
+    }
+    .loader div {
+        width: 0;
+        height: 10px;
+        background-color: white;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: loading 5s linear forwards;
+    }
+    @keyframes loading {
+        100% {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+<audio id="music" autoplay loop>
+  <source src="System/StartSong.mp3" type="audio/mp3"> Your browser does not support the audio element.
+</audio>
+<div class="loader">
+    <img id="image" src="Load.jpeg" alt="Loading Image">
+    <div></div>
+</div>
+<script>
+    setTimeout(function() {
+        window.location.href = 'menu/menu.html';
+    }, 5000); // Загрузка продолжается 5 секунд
+</script>
+
+<script>
+const image = document.getElementById('image');
+image.onload = function() {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+
+    // Устанавливаем размер холста равным размерам изображения
+    canvas.width = image.width;
+    canvas.height = image.height;
+
+    // Рисуем изображение на холсте
+    context.drawImage(image, 0, 0);
+
+    //  цвет пикселя с края изображения
+    const topPixelData = context.getImageData(0, 0, image.width, 1).data;
+
+
+}
+</script>
+
+</body>
+</html>

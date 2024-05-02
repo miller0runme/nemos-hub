@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemos Hub</title>
+<style>
+body {
+    background-color: #252525fe;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.menu-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: orange;
+    color: black;
+    padding: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 34px;
+
+}
+
+
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text {
+    text-align: center;
+    color: #b5b5b5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #b6b6b6;
+}
+
+p {
+    color: #b5b5b5;
+}
+
+.menu {
+    position: fixed;
+    bottom: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background: #0d0d0dfe;
+    transition: 0.3s;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 15px;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+.new {
+    padding: 20px;
+    text-align: center;
+    background-color: #464646;
+    border-radius: 10px;
+}
+
+.newph {
+    position: center;
+    weight: 170px;
+    height: 160px;
+    border-radius: 10px;
+}
+
+.черта {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, orange, purple, green);
+}
+
+.menu.active {
+    left: 0;
+}
+</style>
+</head>
+<body>
+<button class="menu-button" onclick="toggleMenu()"><span></span><span></span><span></span><span class="icon">&#9776</span></button>
+<div class="menu">
+
+
+
+<br><br><br><br>
+<img style="weight: 143px; height: 143px;" src="bannerava.jpeg" alt="banner is not defined...">
+
+<p class="черта"></p>
+
+<h2 style="background-color: #303030;" class="text">NEMOS!</h2>
+
+<p class="черта"></p>
+    
+<ul style="background-color: #b4a5b4;">
+<li><a href="../news/index.html">Новости</a></li>
+<li><a href="../developments/index.html">Разработки</a></li>
+<li><a href="../links/index.html">Ссылки</a></li>
+</ul>
+</div>
+<div class="content">
+    
+<!-- Ваш контент здесь -->
+
+<h1 style='background-color: #304034;' class='text' >NEMOS HUB!</h1>
+<h2 style="background-color: #000000; color: white;" class="text"><span><img style="width: 20px; height: 20px;" src="загруженное.svg" alt="фото грузится"</span> НОВЫЕ МАТЕРИАЛЫ</h2>
+
+
+
+
+
+<!-- ОСТАЛЬНОЕ! -->
+<br><br><br><br><br><br><br><br>
+
+
+
+
+
+<div id="n1" class="new">
+
+<img class="newph" src="n1ava.png" alt="не грузит :(">
+<h2 style="color: orange;">Web Кликер: Стандарт</h2>
+<span style="color: #caaaff;">02.05.2024</span>
+<p class="черта"></p>
+<p>Веб кликер, с сохранением лучшего результата и таблицой лидеров, созданный на HTML, JS, CSS и серверных библиотеках.</p>
+<p class="черта"></p>
+<button id="clickerOpen" style="background-color: #6ab6ff; padding: 20px; font-size: 30px; border-radius: 10px; ">ИГРАТЬ СЕЙЧАС!</button>
+<br>
+
+</div>
+
+
+
+<!-- СТАРЫЕ -->
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+document.getElementById('clickerOpen').addEventListener('click', function() {
+    window.location.href = '../../developments/clicker/start.html';
+});
+
+function toggleMenu() {
+    document.querySelector('.menu').classList.toggle('active');
+}
+
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.menu') && !event.target.closest('.menu-button')) {
+        document.querySelector('.menu').classList.remove('active');
+    }
+});
+</script>
+</body>
+</html>
