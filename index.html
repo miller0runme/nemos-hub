@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nemos Hub</title>
 
+<script>
 const TelegramBot = require('node-telegram-bot-api');
 const { createServer } = require('http');
 
@@ -33,6 +34,9 @@ createServer((req, res) => {
 }).listen(3000, () => {
     console.log('Server running at http://localhost:3000/');
 });
+</script>
+
+    
     
 <style>
 body {
