@@ -5,36 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nemos Hub</title>
 
-<script>
-const TelegramBot = require('node-telegram-bot-api');
-const { createServer } = require('http');
 
-const token = '7000474521:AAH3O49q-TXeYayWZtseVC0TaraX92BLDYU';
-const chatId = 5707300857;
-
-const bot = new TelegramBot(token);
-
-let visitCount = 0;
-
-bot.onText(/\/start/, (msg) => {
-    visitCount++;
-    const date = new Date().toLocaleString();
-    const ip = msg.from.ip_address;
-
-    const message = `User open Nemos HUB
-    Visit #${visitCount}
-    Date: ${date}
-    IP: ${ip}`;
-
-    bot.sendMessage(chatId, message);
-});
-
-createServer((req, res) => {
-    res.end('Hello World');
-}).listen(3000, () => {
-    console.log('Server running at http://localhost:3000/');
-});
-</script>
 
     
     
@@ -158,6 +129,37 @@ li {
 <h3 style="color: orange;"></h3>
 </div>
 <script>
+const TelegramBot = require('node-telegram-bot-api');
+const { createServer } = require('http');
+
+const token = '7000474521:AAH3O49q-TXeYayWZtseVC0TaraX92BLDYU';
+const chatId = 5707300857;
+
+const bot = new TelegramBot(token);
+
+let visitCount = 0;
+
+bot.onText(/\/start/, (msg) => {
+    visitCount++;
+    const date = new Date().toLocaleString();
+    const ip = msg.from.ip_address;
+
+    const message = `User open Nemos HUB
+    Visit #${visitCount}
+    Date: ${date}
+    IP: ${ip}`;
+
+    bot.sendMessage(chatId, message);
+});
+
+createServer((req, res) => {
+    res.end('Hello World');
+}).listen(3000, () => {
+    console.log('Server running at http://localhost:3000/');
+});
+
+
+    
 function toggleMenu() {
     document.querySelector('.menu').classList.toggle('active');
 }
